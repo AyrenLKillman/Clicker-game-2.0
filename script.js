@@ -1,11 +1,13 @@
+
 const clickCounter = document.getElementById('click-counter');
 let totalMoney = clickCounter.innerText = 0;
 let Multiplier = 1;
 let lastClickTime = 0
+let clickTime = 300
 // Update the click counter
 function updateClickCounter() {
     const currentTime = Date.now();
-    if (currentTime - lastClickTime >= 300) {
+    if (currentTime - lastClickTime >= clickTime) {
         totalMoney = totalMoney + Multiplier;
         clickCounter.innerText = totalMoney;
         lastClickTime = currentTime;
@@ -15,7 +17,6 @@ function updateClickCounter() {
 function updateClickCounterAuto() {
     totalMoney = totalMoney + Multiplier;
     clickCounter.innerText = totalMoney;
-    lastClickTime = currentTime;
 }
 function CostofItem(Price) {
     if (totalMoney >= Price) {
@@ -52,5 +53,23 @@ function EfficientAutoClicker() {
     } else {
         setInterval(updateClickCounterAuto, 1000);
         clickCounter.innerText = totalMoney;
+    }
+}
+
+let Active = false;
+function BetterClicks() {
+
+    if (Active == false) {
+        Active = true;
+        if (CostofItem(100) == false) { console.log(`You don't have enough money`) }
+        else {
+
+            clickTime = 100;
+            clickCounter.innerText = totalMoney;
+        }
+    } else {
+        Active = true;
+        console.log(`Already active`)
+
     }
 }
